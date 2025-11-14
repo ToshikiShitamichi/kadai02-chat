@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プログラミングチャット</title>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-header">
+                <div class="logo"><span class="material-symbols-outlined">
+                        code_blocks
+                    </span></div>
+                <div class="icon current-nav"><span class="material-symbols-outlined">home</span></div>
+            </div>
+            <div class="navbar-footer">
+                <div class="icon"><span class="material-symbols-outlined">person</span></div>
+            </div>
+
+
+        </div>
+        <div class="thread">
+            <div class="thread-header">
+                <div class="create"><span class="material-symbols-outlined">edit_square</span></div>
+            </div>
+            <div class="thread-list">
+                <p class="current-thread">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+                <p class="thread-title">スレッド名</p>
+            </div>
+        </div>
+        <div class="chat">
+            <div class="chat-header">
+                <p>スレッドタイトル</p>
+            </div>
+            <div class="chat-list">
+            </div>
+            <div class="chat-editor">
+                <div id="editor">
+                    <textarea id="msg"></textarea>
+                </div>
+                <div class="send"><span id="send" class="material-symbols-outlined">send</span></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Include the Quill library -->
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <script src="./js/quill.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+        import { getDatabase, ref, set, push, onChildAdded } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";;
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDkU5HSGPA5HYJloeWhWsT8ipH-uicGcek",
+            authDomain: "kadai02-chat.firebaseapp.com",
+            databaseURL: "https://kadai02-chat-default-rtdb.firebaseio.com",
+            projectId: "kadai02-chat",
+            storageBucket: "kadai02-chat.firebasestorage.app",
+            messagingSenderId: "567997887080",
+            appId: "1:567997887080:web:285d4604cf04819b93c1dd"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        // Initialize Realtime Database and get a reference to the service
+        const database = getDatabase(app);
+
+        const db = getDatabase();
+        const dbRef = ref(db, 'test');
+        const newPostRef = push(dbRef);
+
+        $("#send").on("click", function () {
+            const msg = {
+                html: quill.root.innerHTML,
+            }
+            set(newPostRef, msg)
+        });
+
+        onChildAdded(dbRef, function (data) {
+            const html = data.val().html;
+            let h = '<div class="chat-msg">' + html + '</div><hr>'
+            $(".chat-list").append(h);
+        })
+    </script>
+
+</body>
+
+</html>

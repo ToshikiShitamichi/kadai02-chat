@@ -1,0 +1,111 @@
+/* div {
+    border: 1px solid black;
+} */
+
+.container {
+    display: flex;
+    width: 95vw;
+    height: 95vh;
+    border: 1px solid black;
+}
+
+.navbar {
+    background-color: #481449;
+    color: white;
+    width: 5%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    text-align: center;
+}
+
+.navbar-header {
+    height: 90%;
+}
+
+.logo {
+    font-size: 50px;
+}
+
+.icon {
+    font-size: 40px;
+}
+
+.icon:hover {
+    background-color: #714774;
+}
+
+.navbar-footer {
+    height: 10%;
+}
+
+.current-nav {
+    background-color: #714774;
+}
+
+.thread {
+    background-color: #5B2B5C;
+    color: white;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+}
+
+.thread-header {
+    height: 10%;
+    border-bottom: 1px solid black;
+    text-align: right;
+    padding-right: 5%;
+}
+
+.create {
+    font-size: 40px;
+}
+
+.thread-list {
+    height: 90%;
+    overflow: auto;
+    padding-left: 5%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.thread-title:hover{
+    background-color: #714774;
+}
+
+.current-thread{
+    color: #4C1D4E;
+    background-color: #F9EDFF;
+}
+
+.chat {
+    background-color: #FFFFFF;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    height: 10%;
+    border-bottom: 1px solid black;
+    padding-left: 5%;
+}
+
+.chat-list {
+    height: 70%;
+    overflow: auto;
+    padding-left: 5%;
+}
+
+.chat-editor {
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.send {
+    font-size: 40px;
+    display: flex;
+    justify-content: right;
+}
