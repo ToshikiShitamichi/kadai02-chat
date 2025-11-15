@@ -55,56 +55,23 @@
             </div>
             <div class="chat-editor">
                 <div id="editor">
-                    <textarea id="msg"></textarea>
                 </div>
                 <div class="send"><span id="send" class="material-symbols-outlined">send</span></div>
             </div>
         </div>
     </div>
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <!-- Include the Quill library -->
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <script src="./js/quill.js"></script>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { getDatabase, ref, set, push, onChildAdded } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";;
+    <!-- firebase -->
+    <script type="module" src="./js/firebase.js"></script>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDkU5HSGPA5HYJloeWhWsT8ipH-uicGcek",
-            authDomain: "kadai02-chat.firebaseapp.com",
-            databaseURL: "https://kadai02-chat-default-rtdb.firebaseio.com",
-            projectId: "kadai02-chat",
-            storageBucket: "kadai02-chat.firebasestorage.app",
-            messagingSenderId: "567997887080",
-            appId: "1:567997887080:web:285d4604cf04819b93c1dd"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-
-        // Initialize Realtime Database and get a reference to the service
-        const database = getDatabase(app);
-
-        const db = getDatabase();
-        const dbRef = ref(db, 'test');
-        const newPostRef = push(dbRef);
-
-        $("#send").on("click", function () {
-            const msg = {
-                html: quill.root.innerHTML,
-            }
-            set(newPostRef, msg)
-        });
-
-        onChildAdded(dbRef, function (data) {
-            const html = data.val().html;
-            let h = '<div class="chat-msg">' + html + '</div><hr>'
-            $(".chat-list").append(h);
-        })
-    </script>
-
+    <!-- main.js -->
+    <script src="./js/main.js"></script>
 </body>
 
 </html>
