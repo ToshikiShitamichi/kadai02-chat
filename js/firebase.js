@@ -1,5 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getDatabase, ref, set, push, onChildAdded } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";;
+import { GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyDkU5HSGPA5HYJloeWhWsT8ipH-uicGcek",
@@ -14,6 +17,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+// データベース関係
 // Initialize Realtime Database and get a reference to the service
 const database = getDatabase(app);
 
@@ -34,3 +38,6 @@ onChildAdded(dbRef, function (data) {
     let h = '<div class="chat-msg">' + html + '</div><hr>'
     $(".chat-list").append(h);
 })
+
+// 認証関係
+const provider = new GoogleAuthProvider();
