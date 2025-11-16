@@ -1,24 +1,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getDatabase, ref, set, push, onChildAdded } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";;
-import { GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-
-
-
-const firebaseConfig = {
-    apiKey: "AIzaSyDkU5HSGPA5HYJloeWhWsT8ipH-uicGcek",
-    authDomain: "kadai02-chat.firebaseapp.com",
-    databaseURL: "https://kadai02-chat-default-rtdb.firebaseio.com",
-    projectId: "kadai02-chat",
-    storageBucket: "kadai02-chat.firebasestorage.app",
-    messagingSenderId: "567997887080",
-    appId: "1:567997887080:web:285d4604cf04819b93c1dd"
-};
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 // データベース関係
-// Initialize Realtime Database and get a reference to the service
+// Initialize Realtime Database and get a reference to the serv ice
 const database = getDatabase(app);
 
 const db = getDatabase();
@@ -41,3 +29,23 @@ onChildAdded(dbRef, function (data) {
 
 // 認証関係
 const provider = new GoogleAuthProvider();
+const auth = getAuth();
+signInWithPopup(auth, provider)
+    .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+    }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+    });
