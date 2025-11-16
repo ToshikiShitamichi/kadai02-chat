@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getDatabase, ref, set, push, onChildAdded } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";;
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { getAuth, signInWithRedirect, GoogleAuthProvider, onAuthStateChanged, } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
 import firebaseConfig from "./api.js"
 
@@ -11,50 +11,14 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
-// 現在ログイン中のユーザーを保持する変数
-let currentUser = null;
-
-// ナビバーのユーザーアイコンを書き換える
-function renderUser(user) {
-    const $userIcon = $("#user-icon");
-
-    if (!user) {
-        // 未ログイン時：デフォルトのアイコンに戻す
-        $userIcon.html('<span class="material-symbols-outlined">person</span>');
-        return;
-    }
-
-    const userName = user.displayName || "No name";
-    const userIcon = user.photoURL || "img/default-icon.png";
-
-    console.log("User:", userName, userIcon);
-
-    // ナビバーのアイコンを差し替え
-    $userIcon.html(
-        `<img class="user-icon" src="${userIcon}">`
-    );
-}
-
-// Google ポップアップでログイン
-function signInWithGooglePopup() {
-    return signInWithPopup(auth, provider).catch((error) => {
-        console.error("Google ログインエラー:", error);
-        alert("Google ログインに失敗しました");
-    });
-}
-
 // ログイン状態の監視
 onAuthStateChanged(auth, (user) => {
-    console.log("onAuthStateChanged:", user);
-    currentUser = user;
+    let currentUser = user;
 
     if (user) {
-        // ログイン済み
-        renderUser(user);
+        $("#user-icon").html('<img class="user-icon" src="' + user.photoURL + '">');
     } else {
-        // 未ログイン → デフォルトアイコンにしてから、ポップアップ表示
-        renderUser(null);
-        signInWithGooglePopup();
+        signInWithRedirect(auth, provider);
     }
 });
 
@@ -82,6 +46,6 @@ onChildAdded(dbRef, function (data) {
     const sendUserName = data.val().uN;
     const sendDate = data.val().date;
     const html = data.val().html;
-    let h = '<div class="chat-msg"><img class="user-icon" src="' + sendUserIcon + '">' + sendUserName + sendDate + html + '</div><hr>'
+    let h = '<div class="chat-msg"><p class="chat-detail"><img class="user-icon" src="' + sendUserIcon + '"><span class="username">' + sendUserName + '</span><span class="date">' + sendDate + '</span></p>' + html + '</div><hr>'
     $(".chat-list").append(h);
 })

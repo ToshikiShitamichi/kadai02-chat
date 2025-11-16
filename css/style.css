@@ -27,12 +27,17 @@
     font-size: 50px;
 }
 
+.logo:hover {
+    cursor: pointer;
+}
+
 .icon {
     font-size: 40px;
 }
 
 .icon:hover {
     background-color: #714774;
+    cursor: pointer;
 }
 
 .navbar-footer {
@@ -42,8 +47,18 @@
     align-items: center;
 }
 
+.navbar-footer img{
+    width: 90%;
+}
+
 .current-nav {
     background-color: #714774;
+}
+
+.user-icon {
+    width: 30px;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .thread {
@@ -63,6 +78,7 @@
 
 .create {
     font-size: 40px;
+    cursor: pointer;
 }
 
 .thread-list {
@@ -71,14 +87,26 @@
     padding-left: 5%;
     white-space: nowrap;
     overflow: hidden;
+    line-height: 15px;
+    font-size: 15px;
+}
+
+.thread-title{
+    margin: 0;
+    padding: 10px;
 }
 
 .thread-title:hover {
     background-color: #714774;
+    cursor: pointer;
 }
 
 .current-thread {
     color: #4C1D4E;
+    background-color: #F9EDFF;
+}
+
+.current-thread:hover {
     background-color: #F9EDFF;
 }
 
@@ -99,7 +127,25 @@
     height: 60%;
     overflow: auto;
     padding-left: 5%;
+    line-height: 15px;
+    font-size: 15px;
 }
+
+.chat-detail{
+    display: flex;
+    align-items: center;
+}
+.username{
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.date{
+    font-size: 75%;
+    color: gray;
+    margin-left: 5px;
+}
+
 
 .chat-editor {
     height: 30%;
@@ -115,9 +161,5 @@
     font-size: 40px;
     display: flex;
     justify-content: right;
-}
-
-.user-icon{
-    width: 30px;
-    text-align: center;
+    cursor: pointer;
 }
