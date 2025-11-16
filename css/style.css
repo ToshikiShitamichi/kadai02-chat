@@ -37,6 +37,9 @@
 
 .navbar-footer {
     height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .current-nav {
@@ -70,11 +73,11 @@
     overflow: hidden;
 }
 
-.thread-title:hover{
+.thread-title:hover {
     background-color: #714774;
 }
 
-.current-thread{
+.current-thread {
     color: #4C1D4E;
     background-color: #F9EDFF;
 }
@@ -104,7 +107,7 @@
     flex-direction: column;
 }
 
-.ql-container{
+.ql-container {
     height: 60%;
 }
 
@@ -112,4 +115,9 @@
     font-size: 40px;
     display: flex;
     justify-content: right;
+}
+
+.user-icon{
+    width: 30px;
+    text-align: center;
 }
