@@ -2,6 +2,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebas
 import { getDatabase, ref, set, push, onChildAdded } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";;
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
+import firebaseConfig from "./api.js"  
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
